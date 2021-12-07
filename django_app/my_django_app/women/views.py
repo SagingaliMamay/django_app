@@ -1,5 +1,5 @@
+from django.http.response import HttpResponseNotFound, Http404, HttpResponse
 from django.shortcuts import render
-from django.http import HttpResponse
 
 
 # Create your views here.
@@ -13,4 +13,19 @@ def index(request):
 
 
 def categories(request, catid):
+    if request.GET:
+        print(request.GET)
     return HttpResponse(f"<h1>Articles by Categories</h1><p>{catid}</p>")
+
+
+# Displaying date
+def archive(request, year):
+    if int(year) > 2022:
+        raise Http404
+    return HttpResponse(f"<h1>Archive of year</h1><p>{year}</p>")
+
+
+# for 404 cases
+
+def pageNotFound(request, exception):
+    return HttpResponseNotFound("<h1> This page not found 404</h1>")
