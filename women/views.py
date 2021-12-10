@@ -1,5 +1,5 @@
 from django.http.response import HttpResponseNotFound, Http404, HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 
 # Create your views here.
@@ -21,7 +21,8 @@ def categories(request, catid):
 # Displaying date
 def archive(request, year):
     if int(year) > 2022:
-        raise Http404
+        return redirect('home', permanent=True)
+
     return HttpResponse(f"<h1>Archive of year</h1><p>{year}</p>")
 
 
